@@ -1,3 +1,4 @@
 ## 色々javaサンプル
 
-### Sprint4
+### Spring4
+
