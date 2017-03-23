@@ -1,6 +1,5 @@
 package spring4.second;
 
-public interface ISomeService {
-
+public interface SomeService {
     public String getMessage();
 }

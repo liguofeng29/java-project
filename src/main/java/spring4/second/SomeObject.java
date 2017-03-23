@@ -9,11 +9,11 @@ public class SomeObject {
 
     @Autowired
     @Qualifier("SomeServiceAImpl")
-    private ISomeService serviceA;
+    private SomeService serviceA;
 
     @Autowired
     @Qualifier("SomeServiceBImpl")
-    private ISomeService serviceB;
+    private SomeService serviceB;
 
     public void run() {
         System.out.println(serviceA.getMessage());

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class LazyInitBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
-
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
