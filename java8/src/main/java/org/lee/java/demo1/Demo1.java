@@ -37,7 +37,7 @@ public class Demo1 {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("従来の書き方：この行為を実行します。");
+                System.out.println("別スレッドでこの行為を実行します。");
             }
         }).start();
 
@@ -50,8 +50,7 @@ public class Demo1 {
         // ラムダ式で書いてみよう
         // オブジェクトではなくて、行為を渡す
         new Thread(() -> {
-            System.out.println("ラムダ式：行為1を実行します。");
-            System.out.println("ラムダ式：行為2を実行します。");
+            System.out.println("別スレッドで行為1を実行します。");
         }).start();
     }
 
@@ -86,8 +85,8 @@ public class Demo1 {
         String outer = "outerString";
 
         // 値参照
-        Runnable runnable1 = () -> System.out.println("外部変数 : " + outer) ;
-        runnable1.run();
+        Runnable runnable = () -> System.out.println("外部変数 : " + outer) ;
+        demo3Sub(runnable);
 
         // エラー：ラムダ式から参照されるローカル変数は、finalまたは事実上のfinalである必要があります
         // outer = "change to something will be error";
@@ -95,7 +94,7 @@ public class Demo1 {
     }
 
     private static void demo3Sub(Runnable runnable) {
-        // 外部変数 : outerString
+        String outer = "demo3Sub";
         runnable.run();
     }
 
