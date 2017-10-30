@@ -94,10 +94,7 @@ public class Refactor {
 
         List<Album> albumList = new ArrayList<>();
 
-        Random random = new Random(System.currentTimeMillis());
-
-        int count = random.nextInt(albumSize) + 1;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < albumSize; i++) {
 
             Album album = new Album("musician:" + RandomStringUtils.randomAlphabetic(10), makeTrackList(trackSize));
             albumList.add(album);
@@ -113,8 +110,7 @@ public class Refactor {
 
         Random random = new Random(System.currentTimeMillis());
 
-        int count = random.nextInt(trackSize) + 1;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < trackSize; i++) {
 
             Track track = new Track("track : " + RandomStringUtils.randomAlphabetic(10), random.nextInt(5) + 1);
             trackList.add(track);

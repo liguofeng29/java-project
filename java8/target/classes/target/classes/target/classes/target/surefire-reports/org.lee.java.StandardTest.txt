@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: org.lee.java.StandardTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 1, Time elapsed: 0.013 sec <<< FAILURE! - in org.lee.java.StandardTest
+failingTest()  Time elapsed: 0.01 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: a failing test
+	at org.lee.java.StandardTest.failingTest(StandardTest.java:34)
+
