@@ -1,0 +1,3 @@
+com\mycompany\Client.class
+com\mycompany\ClientReadThread.class
+com\mycompany\ClientWriteThread.class

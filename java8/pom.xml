@@ -34,6 +34,15 @@
             <version>1.2.17</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>compile</scope>
+        </dependency>
+
+
 
         <!-- Junit5の最小構成 -->
         <dependency>
@@ -66,6 +75,20 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-core -->
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-platform -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-platform</artifactId>
+            <version>2.1.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+
+
     </dependencies>
 
     <build>
