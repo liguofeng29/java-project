@@ -36,6 +36,7 @@ public class CompletableFutureSample {
         CompletableFuture<List<String>> lookupMusicians = loginTo("musician")
             .thenCompose(auth -> lookupMusicians(albumName));
 
+        Thread.sleep(1000 * 2);
         // 二つを結ぶ
         lookupTracks.thenCombine(lookupMusicians, (tracks, musicians) -> {
             System.out.println("曲リスト：" +
