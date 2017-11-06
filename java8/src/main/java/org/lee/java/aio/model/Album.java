@@ -1,13 +1,14 @@
-package org.lee.java.model;
+package org.lee.java.aio.model;
 
 import java.util.List;
 
 public class Album {
     private String albumName;
-    private String musician; // 歌手
-    private List<Track> trackList;  // 曲リスト
+    private String musician;
+    private List<Track> trackList;
 
-    public Album(String musician, List<Track> trackList) {
+    public Album(String albumName, String musician, List<Track> trackList) {
+        this.albumName = albumName;
         this.musician = musician;
         this.trackList = trackList;
     }
@@ -18,6 +19,10 @@ public class Album {
 
     public List<Track> getTrackList() {
         return trackList;
+    }
+
+    public String getAlbumName() {
+        return albumName;
     }
 }
 
