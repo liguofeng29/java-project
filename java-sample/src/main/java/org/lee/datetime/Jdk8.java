@@ -31,9 +31,9 @@ public class Jdk8 {
 //
 //        testClock();
 //
-        testDuration();
+//        testDuration();
 //
-        //testPeriod();
+//        testPeriod();
 
 //        testInstant();
 //
