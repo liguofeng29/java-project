@@ -20,23 +20,20 @@ public class CompletableFutureSample {
     private static List<Album> albums = AlbumFactory.get(2, 5);
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-
         long start = System.currentTimeMillis();
         lookupByName("album1");
         System.out.println("検索時間 : " + ((System.currentTimeMillis() - start) / 1000));
-
     }
 
     public static void lookupByName(String albumName) throws InterruptedException {
-        System.out.println("1. lookupTracks completableFuture生成(実行はしない)");
+
         CompletableFuture<List<String>> lookupTracks = loginTo("track")
             .thenCompose(auth -> lookupTracks(albumName));
 
-        System.out.println("2. lookupMusicians completableFuture生成(実行はしない)");
         CompletableFuture<List<String>> lookupMusicians = loginTo("musician")
             .thenCompose(auth -> lookupMusicians(albumName));
 
-        Thread.sleep(1000 * 2);
+
         // 二つを結ぶ
         lookupTracks.thenCombine(lookupMusicians, (tracks, musicians) -> {
             System.out.println("曲リスト：" +
@@ -75,7 +72,6 @@ public class CompletableFutureSample {
 
     // 曲検索
     private static CompletableFuture<List<String>> lookupTracks(String albumName) {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
         return CompletableFuture.supplyAsync(
             () -> {
                 System.out.println("曲検索開始");
@@ -93,7 +89,6 @@ public class CompletableFutureSample {
 
     // ミュージシャン検索
     private static CompletableFuture<List<String>> lookupMusicians(String albumName) {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
         return CompletableFuture.supplyAsync(
             () -> {
                 System.out.println("ミュージシャン検索開始");

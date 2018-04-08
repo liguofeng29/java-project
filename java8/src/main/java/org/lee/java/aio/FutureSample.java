@@ -16,25 +16,32 @@ import java.util.stream.Stream;
  */
 public class FutureSample {
 
+    private static ExecutorService executor = Executors.newFixedThreadPool(4);
+
     private static List<Album> albums = AlbumFactory.get(2, 5);
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        long start = System.currentTimeMillis();
-        lookupByName("album1");
-        System.out.println("検索時間 : " + ((System.currentTimeMillis() - start) / 1000));
-
+        try {
+            long start = System.currentTimeMillis();
+            lookupByName("album1");
+            System.out.println("検索時間 : " + ((System.currentTimeMillis() - start) / 1000));
+        } finally {
+            executor.shutdown();
+        }
     }
 
     public static void lookupByName(String albumName) throws InterruptedException {
 
-        System.out.println("1. track login future生成(実行はしない)");
         Future<Boolean> trackLogin = loginTo("track");
-        System.out.println("2. musician login future生成(実行はしない)");
         Future<Boolean> musicianLogin = loginTo("artist");
+
         try {
+            Thread.sleep(1000);
+            System.out.println("authTrack終わった？: " + trackLogin.isDone());
             boolean authTrack = trackLogin.get();
-            boolean authMusian = musicianLogin.get();
+            System.out.println("authMusician終わった？: " + musicianLogin.isDone());
+            boolean authMusician = musicianLogin.get();
 
             Future<List<String>> tracks = lookupTracks(albumName);
             Future<List<String>> musicians = lookupMusicians(albumName);
@@ -61,7 +68,6 @@ public class FutureSample {
             sleep = 10;
         }
 
-        ExecutorService executor = Executors.newFixedThreadPool(2);
         return executor.submit(
             () -> {
                 System.out.println(sleep + "秒かかる" + kind + " login処理開始");
@@ -73,7 +79,7 @@ public class FutureSample {
 
     // 曲検索
     private static Future<List<String>> lookupTracks(String albumName) {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+
         return (Future<List<String>>) executor.submit(
             () -> {
                 System.out.println("曲検索開始");
@@ -87,7 +93,6 @@ public class FutureSample {
 
     // ミュージシャン検索
     private static Future<List<String>> lookupMusicians(String albumName) {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
         return (Future<List<String>>) executor.submit(
             () -> {
                 System.out.println("ミュージシャン検索開始");

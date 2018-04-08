@@ -66,7 +66,6 @@ factory methodは、どのオブジェクトを生成するかの実行は使用
 3. acceptor(データ構造)を追加するのは難しい
 4. acceptorはvisitorに必要な情報を公開する必要があります。
 
-
 ## Chain of responsibility
 要求(request)と処理(handler)の結合度を弱くする
 
@@ -78,8 +77,14 @@ factory methodは、どのオブジェクトを生成するかの実行は使用
 ## Facade
 
 ## Mediator
+複数のオブジェクト間のやり取りをまとめるMediator。
+処理が集中されるのがメリットでもあり、デメリットでもある。
 
+Colleagueは再利用、拡張しやすいが、Mediatorは再利用が難しい。
 
+関連パタンーん：
+Observer - Mediatorの通知仕組みに使われることがある
+Facade - Facadeは一方向、Mediatorは双方向である
 
 
 # 状態を管理する
@@ -106,7 +111,6 @@ Mediator - Mediatorに通知する仕組みとしてobserverが使われる場�
 1. なにを共有させるかは慎重に選ぶ
 2. intrinsic（本質的な） -> 共有させる情報
 3. extrinsic（非本質的な）-> 共有させない情報
-
 
 ## proxy
 必要な時に生成する(遅延生成)
