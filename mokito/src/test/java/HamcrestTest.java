@@ -2,10 +2,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.any;
@@ -21,7 +18,6 @@ import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.CoreMatchers.theInstance;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.object.HasToString.hasToString;
 
@@ -98,6 +94,48 @@ public class HamcrestTest {
 
         // |n−operand|≦error
         assertThat(Double.valueOf("1"), closeTo(2, 1.0));
+    }
+
+    @Test
+    public void aboutArray() {
+        Integer[] intArray = {1, 2, 3};
+
+        assertThat(intArray, not(emptyArray()));
+
+        assertThat(intArray, arrayWithSize(3));
+        assertThat(intArray, arrayWithSize(greaterThan(2)));
+
+        assertThat(intArray, is(array(is(1), is(2), is(3))));
+
+        assertThat(intArray, hasItemInArray(3));
+
+        assertThat(intArray, arrayContaining(1, 2, 3));
+
+        assertThat(intArray, arrayContainingInAnyOrder(1, 2, 3));
+    }
+
+    @Test
+    public void aboutMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "aa");
+        map.put("b", "bb");
+        map.put("c", "cc");
+
+        assertThat(map, hasEntry("a", "aa"));
+        assertThat(map, hasEntry("b", "bb"));
+        assertThat(map, hasEntry("c", "cc"));
+
+        assertThat(map, hasKey("a"));
+        assertThat(map, hasKey("b"));
+        assertThat(map, hasKey("c"));
+        assertThat(map, hasKey(startsWith("b")));
+        assertThat(map, not(hasKey(startsWith("d"))));
+
+        assertThat(map, hasValue("aa"));
+        assertThat(map, hasValue("bb"));
+        assertThat(map, hasValue("cc"));
+        assertThat(map, hasValue(endsWith("a")));
+        assertThat(map, not(hasValue(startsWith("d"))));
     }
 
     @Data
