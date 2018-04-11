@@ -97,6 +97,39 @@ public class HamcrestTest {
     }
 
     @Test
+    public void aboutCollection() {
+
+        assertThat(Arrays.asList(1, 2, 3), hasItem(1));
+        assertThat(Arrays.asList(1, 2, 3), hasItem(greaterThan(2)));
+        assertThat(Arrays.asList(1, 2, 3), hasItems(1, 2, 3));
+        assertThat(Arrays.asList(1, 2, 3), hasItems(greaterThan(2)));
+
+        assertThat(Arrays.asList(1, 2, 3), everyItem(lessThan(4)));
+
+        assertThat(1, isIn(asList(1, 2, 3)));
+
+        assertThat(Arrays.asList(1, 2, 3), isOneOf(asList(1, 2, 3), asList(4, 5, 6)));
+
+        assertThat(Arrays.asList(1, 2, 3), not(empty()));
+
+        assertThat(Arrays.asList(1, 2, 3), not(emptyCollectionOf(Integer.class)));
+
+        assertThat(Arrays.asList(1, 2, 3), hasSize(3));
+        assertThat(Arrays.asList(1, 2, 3), hasSize(greaterThan(2)));
+
+        assertThat(Arrays.asList(1, 2, 3), not(emptyIterable()));
+        assertThat(Arrays.asList(1, 2, 3), iterableWithSize(3));
+        assertThat(Arrays.asList(1, 2, 3), iterableWithSize(greaterThan(2)));
+        assertThat(Arrays.asList(1, 2, 3), contains(1, 2, 3));
+        assertThat(Arrays.asList(1, 2, 3),
+            contains(comparesEqualTo(1), comparesEqualTo(2), comparesEqualTo(3)));
+
+        assertThat(Arrays.asList(1, 2, 3), containsInAnyOrder(3, 2, 1));
+        assertThat(Arrays.asList(1, 2, 3),
+            containsInAnyOrder(comparesEqualTo(3), comparesEqualTo(2), comparesEqualTo(1)));
+    }
+
+    @Test
     public void aboutArray() {
         Integer[] intArray = {1, 2, 3};
 
@@ -157,5 +190,19 @@ public class HamcrestTest {
 
         Bean beanB = new Bean("aValue", "bValue");
         assertThat(bean, samePropertyValuesAs(beanB));
+    }
+
+    @Test
+    public void aboutLogicalOperation() {
+        assertThat(1, anything());
+        assertThat(1, not(2));
+        assertThat(1, not(is(2)));
+
+        assertThat(1, allOf(comparesEqualTo(1), comparesEqualTo(1)));
+        assertThat(1, anyOf(comparesEqualTo(1), comparesEqualTo(2)));
+
+        assertThat("JUnit", either(is("JUnit"))
+            .or(is("ScalaTest"))
+            .or(is("Spock")));
     }
 }
